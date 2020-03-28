@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CalculatorScreen from "./screens/CalculatorScreen";
 import SignInScreen from "./screens/SignInScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import NotesScreen from "./screens/NotesScreen";
 
 import { AuthContext } from "./context/AuthContext";
 
@@ -15,7 +16,7 @@ const Routes = () => {
   const { state } = React.useContext(AuthContext);
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         {state.userToken == null ? (
           <>
             <Stack.Screen name="Sign In" component={SignInScreen} />
@@ -25,6 +26,7 @@ const Routes = () => {
           <>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Calculator" component={CalculatorScreen} />
+            <Stack.Screen name="Notes" component={NotesScreen} />
           </>
         )}
       </Stack.Navigator>

@@ -12,6 +12,14 @@ const HomeScreen = ({ navigation }) => {
       >
         <Text>Calculator</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        title="Calculator"
+        onPress={() => {
+          navigation.navigate("Notes");
+        }}
+      >
+        <Text>Notes</Text>
+      </TouchableOpacity>
     </View>
   );
 };
