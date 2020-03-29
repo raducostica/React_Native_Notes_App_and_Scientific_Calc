@@ -11,7 +11,8 @@ const AuthProvider = props => {
   const initialState = {
     isLoading: true,
     isSignout: false,
-    userToken: null
+    userToken: null,
+    message: ""
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -38,12 +39,26 @@ const AuthProvider = props => {
       },
       signOut: () => dispatch({ type: "SIGN_OUT" }),
       signUp: async data => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `AsyncStorage`
-        // In the example, we'll use a dummy token
+        const config = {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        };
+        try {
+          const res = await myApi.post("/api/users/signup", data, config);
+          console.log("signing up");
 
-        dispatch({ type: "SIGN_IN", token: "dummy-auth-token" });
+          console.log(res.data);
+
+          dispatch({ type: "SIGN_UP" });
+
+          setTimeout(() => {
+            dispatch({ type: "CLEAR_NOTIFICATION" });
+          }, 10000);
+        } catch (error) {
+          console.log(error);
+          return "error";
+        }
       }
     }),
     []
