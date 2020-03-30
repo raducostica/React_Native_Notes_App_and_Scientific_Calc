@@ -10,6 +10,9 @@ import {
 import AuthComponent from "../components/AuthComponent";
 import { AuthContext } from "../context/AuthContext";
 
+import Input from "../components/CustomInput";
+import AuthButtons from '../components/AuthButtons'
+
 const SignUpScreen = ({ navigation }) => {
   const { authContext, state } = useContext(AuthContext);
 
@@ -67,56 +70,35 @@ const SignUpScreen = ({ navigation }) => {
       <>
         {message === "" ? (
           <>
-            <TextInput
-              style={styles.inputs}
-              name="email"
-              placeholder="email"
-              value={userState.email}
-              onChangeText={text => handleChange(text, "email")}
-            />
-            <TextInput
-              style={styles.inputs}
-              name="username"
-              maxLength={16}
-              placeholder="username"
-              value={userState.username}
-              onChangeText={text => handleChange(text, "username")}
+            <Input
+              iconName="envelope"
+              inputName="email"
+              val={userState.email}
+              fn={handleChange}
             />
 
-            <TextInput
-              style={styles.inputs}
-              name="password"
-              maxLength={16}
-              placeholder="password"
-              value={userState.password}
-              secureTextEntry={true}
-              onChangeText={text => handleChange(text, "password")}
+            <Input
+              iconName="user"
+              inputName="username"
+              val={userState.username}
+              fn={handleChange}
             />
 
-            <TextInput
-              style={styles.inputs}
-              name="password2"
-              maxLength={16}
-              placeholder="password"
-              value={userState.password2}
-              secureTextEntry={true}
-              onChangeText={text => handleChange(text, "password2")}
+            <Input
+              iconName="lock"
+              inputName="password"
+              val={userState.password}
+              fn={handleChange}
             />
-            <TouchableOpacity
-              style={styles.signInBtn}
-              onPress={() => handleSubmit()}
-            >
-              <Text style={styles.signInBtnText}>Create Account</Text>
-            </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.navigateBtn}
-              onPress={() => navigation.navigate("Sign In")}
-            >
-              <Text style={styles.navigateBtnText}>
-                Already Have an account? Sign In
-              </Text>
-            </TouchableOpacity>
+            <Input
+              iconName="lock"
+              inputName="password2"
+              val={userState.password2}
+              fn={handleChange}
+            />
+
+            <AuthButtons func={handleSubmit} loginText="Create Account" navigateText="Sign In" navigateButtonText="Already Have an account? Sign In" navigation={navigation} />
           </>
         ) : (
           <>
@@ -136,18 +118,6 @@ const SignUpScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  inputs: {
-    backgroundColor: "#333",
-    marginVertical: 10,
-    paddingVertical: 10,
-    borderRadius: 5,
-    borderColor: "#fff",
-    borderWidth: 1,
-    fontSize: 18,
-    paddingLeft: 15,
-    width: "70%",
-    color: "#fff"
-  },
   navigateBtn: {
     marginVertical: 10
   },

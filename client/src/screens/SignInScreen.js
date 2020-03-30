@@ -1,18 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  Text,
-  View,
-  Dimensions,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  Platform
-} from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import { AuthContext } from "../context/AuthContext";
 import AuthComponent from "../components/AuthComponent";
+
+import Input from "../components/CustomInput";
 
 const SignInScreen = ({ navigation }) => {
   const { authContext } = useContext(AuthContext);
@@ -50,24 +42,20 @@ const SignInScreen = ({ navigation }) => {
   const signInInputs = () => {
     return (
       <>
-        <TextInput
-          style={styles.inputs}
-          name="username"
-          maxLength={16}
-          placeholder="username"
-          value={state.username}
-          onChangeText={text => handleChange(text, "username")}
+        <Input
+          iconName="user"
+          inputName="username"
+          val={state.username}
+          fn={handleChange}
         />
 
-        <TextInput
-          style={styles.inputs}
-          name="password"
-          maxLength={16}
-          placeholder="password"
-          value={state.password}
-          secureTextEntry={true}
-          onChangeText={text => handleChange(text, "password")}
+        <Input
+          iconName="lock"
+          inputName="password"
+          val={state.password}
+          fn={handleChange}
         />
+
         <TouchableOpacity
           style={styles.signInBtn}
           onPress={() => handleSubmit()}
