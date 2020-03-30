@@ -1,12 +1,15 @@
 import React from "react";
 
 import AuthProvider from "./context/AuthContext";
+import NotesProvider from "./context/NotesContext";
 import Routes from "./Routes";
 
 const Provider = () => {
   return (
     <AuthProvider>
-      <Routes />
+      <NotesProvider>
+        <Routes />
+      </NotesProvider>
     </AuthProvider>
   );
 };

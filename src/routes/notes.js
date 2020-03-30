@@ -31,6 +31,7 @@ router.post("/", authMiddleware, async (req, res) => {
 
 // GET NOTES
 router.get("/", authMiddleware, async (req, res) => {
+  console.log("getting notes");
   try {
     const notes = await Notes.find({ user: req.user._id });
 

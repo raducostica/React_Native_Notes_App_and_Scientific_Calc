@@ -1,25 +1,64 @@
 import React from "react";
-import { Text, View, StyleSheet, SafeAreaView, Dimensions } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, FlatList } from "react-native";
 
-const cols = 2;
-const marginHorizontal = 5;
-const marginVertical = 7;
-const width = Dimensions.get("window").width / cols - marginHorizontal * cols;
+import NoteButton from "../components/NoteButton";
+import SingleNote from "../components/SingleNote";
 
-const NotesScreen = () => {
+import { NotesContext } from "../context/NotesContext";
+
+const NotesScreen = ({ navigation }) => {
+  const { getNotes, noteState } = React.useContext(NotesContext);
+  const [active, setActive] = React.useState(false);
+
+  const createNote = async () => {
+    if (!active) {
+      setActive(true);
+    }
+  };
+
+  React.useEffect(() => {
+    getNotes();
+  }, []);
+
+  React.useEffect(() => {
+    if (active) {
+      navigation.navigate("EditNote", {
+        title: "",
+        content: "",
+        active
+      });
+    }
+
+    return () => setActive(false);
+  }, [active]);
+
   return (
     <SafeAreaView style={styles.mainView}>
-      <View>Hello</View>
-      <View>Hello</View>
+      <ScrollView style={styles.notesView}>
+        <FlatList
+          data={noteState.notes}
+          renderItem={({ item }) => (
+            <SingleNote
+              setActive={setActive}
+              active={active}
+              item={item}
+              navigation={navigation}
+            />
+          )}
+          keyExtractor={item => item._id}
+        />
+      </ScrollView>
+      <NoteButton str="+" fn={() => createNote()} />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   mainView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
+  },
+  notesView: {
+    flex: 1
   }
 });
 
