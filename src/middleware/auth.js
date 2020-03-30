@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const config = require("config");
 
 const User = require("../schemas/UserScemha");
 
@@ -12,7 +13,7 @@ module.exports = (req, res, next) => {
   // authorization === "Bearer token"
   const token = authorization.replace("Bearer ", "");
 
-  jwt.verify(token, "jwtSecret", async (err, payload) => {
+  jwt.verify(token, config.get("jwtSecret"), async (err, payload) => {
     if (err) {
       return res.status(401).json({ msg: "You must be logged in" });
     }

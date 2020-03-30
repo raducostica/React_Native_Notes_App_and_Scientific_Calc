@@ -4,6 +4,8 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+const config = require("config");
+
 const User = require("../schemas/UserScemha");
 
 const auth = require("../middleware/auth");
@@ -41,7 +43,7 @@ router.post("/login", async (req, res) => {
 
     jwt.sign(
       { userId: user._id },
-      "jwtSecret",
+      config.get("jwtSecret"),
       {
         expiresIn: 360000
       },
