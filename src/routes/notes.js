@@ -61,6 +61,8 @@ router.put("/:id", authMiddleware, async (req, res) => {
     // find note by id sent
     let note = await Notes.findById(req.params.id);
 
+    console.log(note);
+
     // check if there is a note
     if (!note) {
       return res.status(404).json({ msg: "Note not found" });
@@ -81,6 +83,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
       }
     );
 
+    console.log(note);
     res.json(note);
   } catch (error) {
     console.error(error.message);
@@ -102,7 +105,9 @@ router.delete("/:id", authMiddleware, async (req, res) => {
 
     await Notes.findByIdAndRemove(req.params.id);
     return res.status(201).json({ msg: "successfully deleted" });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

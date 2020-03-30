@@ -1,5 +1,5 @@
 const axios = require("axios");
 
 export default axios.create({
-  baseURL: "http://a00665be.ngrok.io"
+  baseURL: "http://24899c5d.ngrok.io"
 });

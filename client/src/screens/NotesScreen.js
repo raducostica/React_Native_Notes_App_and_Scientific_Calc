@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, ScrollView, FlatList } from "react-native";
+import { StyleSheet, SafeAreaView, View, FlatList } from "react-native";
 
 import NoteButton from "../components/NoteButton";
 import SingleNote from "../components/SingleNote";
@@ -7,7 +7,7 @@ import SingleNote from "../components/SingleNote";
 import { NotesContext } from "../context/NotesContext";
 
 const NotesScreen = ({ navigation }) => {
-  const { getNotes, noteState } = React.useContext(NotesContext);
+  const { getNotes, noteState, deleteNote } = React.useContext(NotesContext);
   const [active, setActive] = React.useState(false);
 
   const createNote = async () => {
@@ -23,8 +23,7 @@ const NotesScreen = ({ navigation }) => {
   React.useEffect(() => {
     if (active) {
       navigation.navigate("EditNote", {
-        title: "",
-        content: "",
+        item: { title: "", content: "" },
         active
       });
     }
@@ -34,8 +33,13 @@ const NotesScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.mainView}>
-      <ScrollView style={styles.notesView}>
+      {/* <View onStartShouldSetResponderCapture={() => {
+          setScroll(true);
+        }}> */}
+      <View style={styles.notesView}>
         <FlatList
+          style={{ flex: 1 }}
+          scrollEnabled={true}
           data={noteState.notes}
           renderItem={({ item }) => (
             <SingleNote
@@ -43,11 +47,13 @@ const NotesScreen = ({ navigation }) => {
               active={active}
               item={item}
               navigation={navigation}
+              delNote={deleteNote}
             />
           )}
-          keyExtractor={item => item._id}
+          keyExtractor={(item, index) => item.title + index}
         />
-      </ScrollView>
+      </View>
+      {/* </View> */}
       <NoteButton str="+" fn={() => createNote()} />
     </SafeAreaView>
   );

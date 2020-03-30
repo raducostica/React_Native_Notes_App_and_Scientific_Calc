@@ -12,7 +12,8 @@ const connectDB = async () => {
       {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
       }
     );
 
@@ -29,7 +30,6 @@ app.use(express.json({ extended: false }));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/notes", require("./routes/notes"));
 app.use("/api/auth", require("./routes/auth"));
-app.use("/api/tracks", require("./routes/tracks"));
 
 app.listen(PORT, () => {
   console.log(`started server on port ${PORT}`);

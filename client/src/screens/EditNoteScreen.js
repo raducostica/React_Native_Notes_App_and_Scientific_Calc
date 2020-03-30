@@ -4,20 +4,34 @@ import { View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 import NoteButton from "../components/NoteButton";
+import { NotesContext } from "../context/NotesContext";
 
-const EditNoteScreen = ({ route }) => {
+const EditNoteScreen = ({ route, navigation }) => {
+  const { addNote, editNote } = React.useContext(NotesContext);
+
   const [state, setState] = React.useState({
     title: "",
     content: ""
   });
 
-  const { title, content, active } = route.params;
+  const { item, active } = route.params;
+
+  const createNote = () => {
+    addNote({ title: state.title, content: state.content });
+    navigation.navigate("Notes");
+  };
+
+  const updateNote = () => {
+    editNote({ title: state.title, content: state.content, _id: item._id });
+    navigation.navigate("Notes");
+  };
 
   React.useEffect(() => {
-    if (title.length > 0 && content.length > 0) {
+    console.log(item);
+    if (item.title.length > 0 && item.content.length > 0) {
       setState({
-        title,
-        content
+        title: item.title,
+        content: item.content
       });
     }
   }, []);
@@ -54,9 +68,9 @@ const EditNoteScreen = ({ route }) => {
       />
       <>
         {!active ? (
-          <NoteButton str="#" fn={() => editNote()} />
+          <NoteButton str="#" fn={() => updateNote()} />
         ) : (
-          <NoteButton str="-" fn={() => saveNote()} />
+          <NoteButton str="-" fn={() => createNote()} />
         )}
       </>
     </>
