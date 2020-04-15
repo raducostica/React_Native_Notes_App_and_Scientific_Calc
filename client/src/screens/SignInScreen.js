@@ -12,13 +12,13 @@ const SignInScreen = ({ navigation }) => {
 
   const [state, setState] = useState({
     username: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (text, name) => {
     setState({
       ...state,
-      [name]: text
+      [name]: text,
     });
   };
 
@@ -26,7 +26,7 @@ const SignInScreen = ({ navigation }) => {
     console.log(state.username, state.password);
     let formData = {
       username: state.username,
-      password: state.password
+      password: state.password,
     };
     try {
       signIn(formData);
@@ -34,7 +34,7 @@ const SignInScreen = ({ navigation }) => {
       console.log(error);
       setState({
         username: "",
-        password: ""
+        password: "",
       });
     }
   };
@@ -89,14 +89,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingLeft: 15,
     width: "70%",
-    color: "#fff"
+    color: "#fff",
+    zIndex: 999,
   },
   navigateBtn: {
-    marginVertical: 15
+    marginVertical: 15,
   },
   navigateBtnText: {
     color: "#fff",
-    fontSize: 16
+    fontSize: 16,
   },
   signInBtn: {
     backgroundColor: "#ff5c33",
@@ -105,12 +106,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     alignItems: "center",
     borderRadius: 15,
-    marginVertical: 20
+    marginVertical: 20,
   },
   signInBtnText: {
     color: "#fff",
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 });
 
 export default SignInScreen;

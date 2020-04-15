@@ -19,7 +19,7 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <>
-        {state.userToken !== null ? (
+        {state.userToken === null ? (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Sign In" component={SignInScreen} />
             <Stack.Screen name="Sign Up" component={SignUpScreen} />

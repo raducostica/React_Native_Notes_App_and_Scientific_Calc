@@ -9,7 +9,7 @@ const Logo = () => {
   useEffect(() => {
     const loadFont = async () => {
       await Font.loadAsync({
-        "monoton-regular": require("../../assets/fonts/Monoton-Regular.ttf")
+        "monoton-regular": require("../../assets/fonts/Monoton-Regular.ttf"),
       });
       setFontLoaded(true);
     };
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#444",
     width: "100%",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   logoBG: {
     backgroundColor: "#ff5c33",
@@ -43,18 +43,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     top: 55,
-    zIndex: 999
+    zIndex: 900,
   },
   logoText: {
     fontFamily: "monoton-regular",
     fontSize: 100,
-    color: "#fff"
+    color: "#fff",
   },
   triangleDesign: {
     flex: 1,
     backgroundColor: "#ffd6cc",
     width: "150%",
-    transform: [{ skewY: "20deg" }]
+    transform: [{ skewY: "20deg" }],
     // width: 0,
     // height: 0,
     // backgroundColor: "transparent",
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
     height: "50%",
     width: "100%",
     position: "absolute",
-    top: 0
-  }
+    top: 0,
+  },
 });
 
 export default Logo;

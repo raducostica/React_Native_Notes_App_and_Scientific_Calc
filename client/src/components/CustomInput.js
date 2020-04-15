@@ -18,7 +18,7 @@ const Input = ({ iconName, inputName, val, fn }) => {
         paddingLeft: 15,
         width: "70%",
         color: "#fff",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       <Icon name={iconName} size={20} color="#f7f7f7" />
@@ -29,7 +29,7 @@ const Input = ({ iconName, inputName, val, fn }) => {
           name={inputName}
           placeholder={inputName}
           value={val}
-          onChangeText={text => fn(text, inputName)}
+          onChangeText={(text) => fn(text, inputName)}
         />
       ) : (
         <TextInput
@@ -37,7 +37,7 @@ const Input = ({ iconName, inputName, val, fn }) => {
           name={inputName}
           placeholder={inputName}
           value={val}
-          onChangeText={text => fn(text, inputName)}
+          onChangeText={(text) => fn(text, inputName)}
         />
       )}
     </View>

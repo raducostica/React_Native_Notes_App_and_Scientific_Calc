@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
           alignSelf: "center",
           width: window.width,
           overflow: "hidden",
-          height: window.width / 1.7
+          height: window.width / 1.7,
         }}
       >
         <View
@@ -25,10 +25,9 @@ const HomeScreen = ({ navigation }) => {
             position: "absolute",
             bottom: 0,
             overflow: "hidden",
-            backgroundColor: "blue",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "blue"
+            backgroundColor: "blue",
           }}
         >
           <View
@@ -38,9 +37,9 @@ const HomeScreen = ({ navigation }) => {
               position: "absolute",
               bottom: 0,
               marginLeft: window.width / 2,
-              backgroundColor: "#9DD6EB",
+              backgroundColor: "#ff704d",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             <Icon name="user" size={70} />
@@ -49,23 +48,65 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <TouchableOpacity
-          title="Calculator"
-          onPress={() => {
-            navigation.navigate("Calculator");
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "space-around",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: "#333",
+            height: "35%",
+            width: "35%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 10,
           }}
         >
-          <Text>Calculator</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          title="Calculator"
-          onPress={() => {
-            navigation.navigate("Notes");
+          <TouchableOpacity
+            style={{
+              height: "100%",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            title="Calculator"
+            onPress={() => {
+              navigation.navigate("Calculator");
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 20 }}>Calculator</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            backgroundColor: "#333",
+            height: "35%",
+            width: "35%",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 10,
           }}
         >
-          <Text>Notes</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: "100%",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            title="Calculator"
+            onPress={() => {
+              navigation.navigate("Notes");
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 20 }}>Notes</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
